@@ -1,1 +1,1 @@
-# movie-db-mp
+# movie-db-mysql
