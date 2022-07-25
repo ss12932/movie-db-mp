@@ -1,1 +1,1 @@
-# week12-mini-project
+# movie-db-mysql
