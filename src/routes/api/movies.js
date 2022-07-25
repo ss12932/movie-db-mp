@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const reviews = require('./reviews');
+// const reviews = require('./reviews');
 const {
   getMovies,
   getMovieById,
@@ -9,6 +9,8 @@ const {
 } = require('../../controllers/api/movies');
 
 const router = Router();
+
+// router.use('/:movieId/reviews', reviews);
 
 router.get('/', getMovies);
 router.get('/:movieId', getMovieById);

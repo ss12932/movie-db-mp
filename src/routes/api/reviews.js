@@ -6,7 +6,8 @@ const {
   deleteReviewById,
 } = require('../../controllers/api/reviews');
 
-const router = Router();
+// access params from parent router make sure you use merge params = true. since http://localhost:4000/movies/:moviesId/reviews/:reviewsId params only for the reviews, since we need to access movieId from parent router
+const router = Router({ mergeParams: true });
 
 router.get('/', getReviews);
 router.post('/', createReview);
