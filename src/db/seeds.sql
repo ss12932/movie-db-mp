@@ -14,6 +14,3 @@ VALUES
 (3, "Review for Jurassic Park 2"),
 (3, "Review for Jurassic Park 2"),
 (3, "Review for Jurassic Park 2");
-
-SELECT * FROM movies;
-SELECT * FROM reviews;

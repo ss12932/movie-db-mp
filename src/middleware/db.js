@@ -10,8 +10,7 @@ const dbOptions = {
 const connection = mysql2.createConnection(dbOptions);
 
 const db = (req, res, next) => {
-  (req.db = connection), (req.body = connection);
-  console.log('db middleware');
+  req.db = connection;
   next();
 };
 

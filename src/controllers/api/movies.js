@@ -1,7 +1,7 @@
 const getMovies = (req, res) => {
   //need to establish connection to execute query.
 
-  const movies = req.db.query('SELECT * FROM movies', (err, data) => {
+  req.db.query('SELECT * FROM movies', (err, data) => {
     if (err) {
       console.log(`[ERROR]: Failed to get movies | ${err.message}`);
       return res.status(500).json({ success: false });
@@ -11,8 +11,7 @@ const getMovies = (req, res) => {
 };
 const getMovieById = (req, res) => {
   //need to establish connection to execute query.
-
-  const movies = req.db.query(
+  req.db.query(
     `SELECT * FROM movies WHERE id="${req.params.movieId}"`,
     (err, data) => {
       if (err) {
@@ -24,13 +23,51 @@ const getMovieById = (req, res) => {
   );
 };
 const createMovie = (req, res) => {
-  res.send('createMovie');
+  const { movieName } = req.body;
+  console.log(movieName);
+  if (!movieName) {
+    return res
+      .status(400)
+      .json({ success: false, error: 'Please provide a movie name' });
+  }
+  req.db.query(
+    `INSERT INTO movies (movie_name) VALUES ("${movieName}")`,
+    (err) => {
+      if (err) {
+        console.log(`[ERROR]: Failed to create movie | ${err.message}`);
+        return res.status(500).json({ success: false });
+      }
+      return res.json({ success: true });
+    }
+  );
 };
 const updateMovieById = (req, res) => {
-  res.send('updateMovieById');
+  const { movieId } = req.params;
+  const { movieName } = req.body;
+  if (!review) {
+    return res
+      .status(400)
+      .json({ success: false, error: 'Please provide a movie' });
+  }
+  req.db.query(
+    `UPDATE movies SET movie_name="${movieName}" WHERE movie_id=${movieId}`,
+    (err) => {
+      if (err) {
+        console.log(`[ERROR]: Failed to create movie | ${err.message}`);
+        return res.status(500).json({ success: false });
+      }
+      return res.json({ success: true });
+    }
+  );
 };
 const deleteMovieById = (req, res) => {
-  res.send('deleteMovieById');
+  req.db.query(`DELETE FROM movies WHERE id="${req.params.movieId}"`, (err) => {
+    if (err) {
+      console.log(`[ERROR]: Failed to delete movie | ${err.message}`);
+      return res.status(500).json({ success: false });
+    }
+    return res.json({ success: true });
+  });
 };
 
 module.exports = {
